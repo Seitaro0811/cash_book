@@ -37,7 +37,7 @@ public class BookUserValidator {
 
         if(code_duplicate_check_flag) {
             EntityManager em = DBUtil.createEntityManager();
-            long users_count = (long)em.createNamedQuery("checkregisteredCode", Long.class)
+            long users_count = (long)em.createNamedQuery("checkRegisteredCode", Long.class)
                                         .setParameter("code", code)
                                         .getSingleResult();
             em.close();
