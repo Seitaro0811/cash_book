@@ -15,6 +15,10 @@ import javax.persistence.Table;
             name = "checkRegisteredCode",
             query = "SELECT COUNT(u) FROM BookUser AS u WHERE u.code = :code"
             ),
+    @NamedQuery(
+            name = "checkLoginCodeAndPassword",
+            query = "SELECT u FROM BookUser AS u WHERE u.code = :code AND u.password = :pass"
+            )
 })
 @Entity
 public class BookUser {
