@@ -15,8 +15,14 @@
                 ${param.content}
             </div>
             <div id="footer">
-               <p><a href="">記帳</a></p>
-               <p><a href="">ログアウト</a></p>
+                <c:choose>
+                    <c:when test="${login_user != null}">
+                        <p><a href="<c:url value='/logout' />">ログアウト</a></p>
+                    </c:when>
+                    <c:otherwise>
+                        <p><a href="<c:url value='/book_users/new' />">新規登録</a></p>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </body>

@@ -42,7 +42,7 @@ public class LoginFilter implements Filter {
         String context_path = ((HttpServletRequest)request).getContextPath();
         String servlet_path = ((HttpServletRequest)request).getServletPath();
 
-        if(!servlet_path.matches("/css.*")) {
+        if(!servlet_path.matches("/css.*") && !servlet_path.matches("/book_users/new") && !servlet_path.matches("/book_users/create")) {
             HttpSession session = ((HttpServletRequest)request).getSession();
 
             BookUser u = (BookUser)session.getAttribute("login_user");
@@ -58,6 +58,7 @@ public class LoginFilter implements Filter {
                     return;
                 }
             }
+            request.setAttribute("login_user", u);
         }
 
         chain.doFilter(request, response);

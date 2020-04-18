@@ -8,6 +8,6 @@
             <c:import url="_form.jsp" />
         </form>
 
-        <p><a href="<c:url value='/cash_book/index' />">トップページに戻る</a></p>
+        <p><a href="<c:url value='/' />">トップページに戻る</a></p>
     </c:param>
 </c:import>

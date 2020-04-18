@@ -67,7 +67,7 @@ public class BookUserCreateServlet extends HttpServlet {
                 em.close();
                 request.getSession().setAttribute("flush", "登録が完了しました。");
 
-                response.sendRedirect(request.getContextPath() + "/book_users/new");
+                response.sendRedirect(request.getContextPath() + "/");
             }
         }
     }
