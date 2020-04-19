@@ -10,6 +10,9 @@
         <div id="wrapper">
             <div id="header">
                 <h1>おこづかい帳</h1>
+                <c:if test="${login_user != null}">
+                    <p><a href="<c:url value='/book_users/edit' />"><c:out value="${login_user.getName()}" /></a></p>
+                </c:if>
             </div>
             <div id="content">
                 ${param.content}
