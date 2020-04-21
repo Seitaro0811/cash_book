@@ -1,7 +1,7 @@
 package models.validators;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import models.Record;
@@ -28,7 +28,7 @@ public class RecordValidator {
         return errors;
     }
 
-    private static String _validateDate(Calendar date) {
+    private static String _validateDate(Date date) {
         if(date == null || date.equals("")) {
             return "日付を入力してください。";
         }

@@ -1,6 +1,6 @@
 package models;
 
-import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,7 +37,7 @@ public class Record {
     private BookUser book_user;
 
     @Column(name = "date", nullable = false)
-    private Calendar date;
+    private Date date;
 
     @Column(name = "content", nullable = false)
     private String content;
@@ -65,11 +65,11 @@ public class Record {
         this.book_user = book_user;
     }
 
-    public Calendar getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Calendar date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
