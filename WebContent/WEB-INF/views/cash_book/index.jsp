@@ -51,5 +51,6 @@
                 </c:choose>
             </c:forEach>
         </div>
+        <p><a href="<c:url value='/records/new' />">記帳</a></p>
     </c:param>
 </c:import>
