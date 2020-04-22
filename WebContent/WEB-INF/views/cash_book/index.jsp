@@ -23,8 +23,10 @@
                     <tr>
                         <td class="record_date"><fmt:formatDate value="${record.date}" pattern="yyyy-MM-dd" /></td>
                         <td class="record_content">${record.content}</td>
-                        <td class="record_amount">${record.amount}</td>
-                        <td class="record_comment"><c:out value="${record.comment}" /></td>
+                        <td class="record_amount">${record.amount} 円</td>
+                        <td class="record_comment">
+                        <a href="<c:url value='/records/edit?id=${record.id}' />"><c:out value="${record.comment}" /></a>
+                        </td>
                     </tr>
                 </c:forEach>
             </tbody>
