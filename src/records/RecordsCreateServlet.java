@@ -45,8 +45,7 @@ public class RecordsCreateServlet extends HttpServlet {
             r.setBook_user((BookUser)request.getSession().getAttribute("login_user"));
 
             try {
-                String date_str = request.getParameter("date");
-                Date date = Date.valueOf(date_str);
+                Date date = Date.valueOf(request.getParameter("date"));
                 r.setDate(date);
             } catch(IllegalArgumentException iae) {}
 
