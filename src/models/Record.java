@@ -20,10 +20,7 @@ import javax.persistence.Table;
             name = "getAllRecords",
             query = "SELECT r FROM Record AS r WHERE r.book_user = :user ORDER BY r.date DESC"
             ),
-    @NamedQuery(
-            name = "getRecordsCount",
-            query = "SELECT COUNT(r) FROM Record AS r WHERE r.book_user = :user"
-            )
+
 })
 @Entity
 public class Record {
