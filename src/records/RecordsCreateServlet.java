@@ -63,6 +63,7 @@ public class RecordsCreateServlet extends HttpServlet {
 
                 request.setAttribute("_token", request.getSession().getId());
                 request.setAttribute("record", r);
+                request.setAttribute("selected", r.getContent());
                 request.setAttribute("errors", errors);
 
                 RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/records/new.jsp");

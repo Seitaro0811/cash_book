@@ -14,6 +14,12 @@
             </c:otherwise>
         </c:choose>
 
+        <br />
+        <form method="POST" action="<c:url value='/records/delete' />">
+            <input type="hidden" name="_token" value="${_token}">
+            <button type="submit">削除</button>
+        </form>
+
         <p><a href="<c:url value='/' />">トップページに戻る</a></p>
     </c:param>
 </c:import>

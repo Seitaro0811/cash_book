@@ -62,6 +62,7 @@ public class RecordsUpdateServlet extends HttpServlet {
                 em.close();
 
                 request.setAttribute("record", r);
+                request.setAttribute("selected", r.getContent());
                 request.setAttribute("_token", request.getSession().getId());
                 request.setAttribute("errors", errors);
 

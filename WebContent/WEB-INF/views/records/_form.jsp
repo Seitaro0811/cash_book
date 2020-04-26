@@ -15,12 +15,14 @@
 
 <label for="content">内容</label>
 <select name="content">
-    <option value="収入">収入</option>
-    <option value="食費">食費</option>
-    <option value="日用品費">日用品費</option>
-    <option value="その他生活費">その他生活費</option>
-    <option value="娯楽費">娯楽費</option>
-    <option value="その他">その他</option>
+    <option value="">選択してください</option>
+        <option value="収入" <c:if test="${selected == '収入'}"> <c:out value="selected" /> </c:if>>収入</option>
+    <option disabled>支出</option>
+        <option value="食費" <c:if test="${selected == '食費'}"> <c:out value="selected" /> </c:if>>食費</option>
+        <option value="日用品費" <c:if test="${selected == '日用品費'}"> <c:out value="selected" /> </c:if>>日用品費</option>
+        <option value="その他生活費" <c:if test="${selected == 'その他生活費'}"> <c:out value="selected" /> </c:if>>その他生活費</option>
+        <option value="娯楽費" <c:if test="${selected == '娯楽費'}"> <c:out value="selected" /> </c:if>>娯楽費</option>
+        <option value="その他" <c:if test="${selected == 'その他'}"> <c:out value="selected" /> </c:if>>その他</option>
 </select>
 <br /><br/>
 

@@ -42,6 +42,7 @@ public class RecordsEditServlet extends HttpServlet {
         BookUser login_user = (BookUser)request.getSession().getAttribute("login_user");
         if(r != null && login_user.getId() == r.getBook_user().getId()) {
             request.setAttribute("record", r);
+            request.setAttribute("selected", r.getContent());
             request.setAttribute("_token", request.getSession().getId());
             request.getSession().setAttribute("record_id", r.getId());
         }
