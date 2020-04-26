@@ -1,6 +1,8 @@
 package cash_book;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -44,25 +46,73 @@ public class IndexServlet extends HttpServlet {
         }
         BookUser login_user = (BookUser)request.getSession().getAttribute("login_user");
 
-        List<Record> records = em.createNamedQuery("getAllRecords", Record.class)
+        List<Record> r = em.createNamedQuery("getAllRecords", Record.class)
                                     .setParameter("user", login_user)
-                                    .setFirstResult(15 * (page - 1))
-                                    .setMaxResults(15)
                                     .getResultList();
-
-        long records_count = (long)em.createNamedQuery("getRecordsCount", Long.class)
-                                        .setParameter("user", login_user)
-                                        .getSingleResult();
 
         em.close();
 
-        request.setAttribute("records", records);
+        Calendar viewed_cl = Calendar.getInstance();
+
+        try {
+            viewed_cl.set(Calendar.YEAR, Integer.parseInt(request.getParameter("year")));
+        } catch(Exception e) {}
+        try {
+            viewed_cl.set(Calendar.MONTH, (Integer.parseInt(request.getParameter("month")) - 1));
+        } catch(Exception e) {}
+
+        List<Record> selected_r = new ArrayList<Record>();
+
+        Calendar rec_cl = Calendar.getInstance();
+        for(int i=0; i < r.size(); i++) {
+            rec_cl.setTime(r.get(i).getDate());
+            if(viewed_cl.get(Calendar.YEAR) == rec_cl.get(Calendar.YEAR) && viewed_cl.get(Calendar.MONTH) == rec_cl.get(Calendar.MONTH)) {
+                selected_r.add(r.get(i));
+            }
+        }
+        long records_count = selected_r.size();
+
+        int income = 0;
+        int expenditure = 0;
+        for(int i=0; i<selected_r.size(); i++) {
+            if(selected_r.get(i).getContent().equals("収入")) {
+                income += selected_r.get(i).getAmount();
+            } else {
+                expenditure += selected_r.get(i).getAmount();
+            }
+        }
+
+        List<String> c_index = new ArrayList<String>();
+        for(Record record : selected_r){
+            if(record.getComment().length() > 10) {
+                c_index.add(record.getComment().substring(0, 10));
+            } else {
+                c_index.add(record.getComment());
+            }
+        }
+
+        List<Record> viewed_r = new ArrayList<Record>();
+        for(int x=(page-1)*10; x<page*10; x++) {
+            try {
+                viewed_r.add(selected_r.get(x));
+            } catch(IndexOutOfBoundsException e) {
+                break;
+            }
+        }
+
+        request.setAttribute("records", viewed_r);
         request.setAttribute("records_count", records_count);
         request.setAttribute("page", page);
         if(request.getSession().getAttribute("flush") != null) {
             request.setAttribute("flush", request.getSession().getAttribute("flush"));
             request.getSession().removeAttribute("flush");
         }
+
+        request.setAttribute("year", viewed_cl.get(Calendar.YEAR));
+        request.setAttribute("month", viewed_cl.get(Calendar.MONTH) + 1);
+        request.setAttribute("income", income);
+        request.setAttribute("expenditure", expenditure);
+        request.setAttribute("c_index", c_index);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/cash_book/index.jsp");
         rd.forward(request, response);

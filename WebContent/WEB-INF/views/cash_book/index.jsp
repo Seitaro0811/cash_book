@@ -8,7 +8,9 @@
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
-        <h2><a href="">←</a> ____年 __月 <a href="">→</a></h2>
+        <h2><a href="<c:url value='/?year=${year}&month=${month-1}' />">←</a>
+        <c:out value=" ${year}" />年 ${month}月
+        <a href="<c:url value='/?year=${year}&month=${month+1}' />">→</a></h2>
         <table id="record_list" border="1">
             <thead>
                 <tr>
@@ -19,36 +21,36 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach var="record" items="${records}">
+                <c:forEach var="record" items="${records}" varStatus="status">
                     <tr>
-                        <td class="record_date"><fmt:formatDate value="${record.date}" pattern="yyyy-MM-dd" /></td>
+                        <td class="record_date"><fmt:formatDate value="${record.date}" pattern="dd" />日</td>
                         <td class="record_content">${record.content}</td>
                         <td class="record_amount">${record.amount} 円</td>
                         <td class="record_comment">
-                        <a href="<c:url value='/records/edit?id=${record.id}' />"><c:out value="${record.comment}" /></a>
+                        <a href="<c:url value='/records/edit?id=${record.id}' />"><c:out value="${c_index.get(status.count-1 + (page-1)*10)}" />…</a>
                         </td>
                     </tr>
                 </c:forEach>
             </tbody>
             <tfoot>
                 <tr>
-                    <td></td>
-                    <td></td>
                     <td>総支出</td>
+                    <td>${expenditure} 円</td>
                     <td>残金</td>
+                    <td>${income - expenditure} 円</td>
                 </tr>
             </tfoot>
         </table>
 
         <div id="pagination">
             (全 ${records_count} 件)<br />
-            <c:forEach var="i" begin="1" end="${(records_count - 1) / 15 + 1}" step="1">
+            <c:forEach var="i" begin="1" end="${(records_count - 1) / 10 + 1}" step="1">
                 <c:choose>
                     <c:when test="${i == page}">
                         <c:out value="${i}" />&nbsp;
                     </c:when>
                     <c:otherwise>
-                        <a href="<c:url value='/?page=${1}' />"><c:out value="${i}" /></a>&nbsp;
+                        <a href="<c:url value='/?year=${year}&month=${month}&page=${i}' />"><c:out value="${i}" /></a>&nbsp;
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
