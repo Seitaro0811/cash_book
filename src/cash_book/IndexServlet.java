@@ -44,11 +44,23 @@ public class IndexServlet extends HttpServlet {
         } catch(Exception e) {
             page = 1;
         }
+
         BookUser login_user = (BookUser)request.getSession().getAttribute("login_user");
 
-        List<Record> r = em.createNamedQuery("getAllRecords", Record.class)
-                                    .setParameter("user", login_user)
-                                    .getResultList();
+        List<Record> r = new ArrayList<Record>();
+
+        String selected_content = request.getParameter("select");
+
+        if(selected_content != null && !selected_content.equals("")) {
+            r = em.createNamedQuery("getSelectedRecords", Record.class)
+                    .setParameter("user", login_user)
+                    .setParameter("content", selected_content)
+                    .getResultList();
+        } else {
+            r = em.createNamedQuery("getAllRecords", Record.class)
+                    .setParameter("user", login_user)
+                    .getResultList();
+        }
 
         em.close();
 
@@ -72,13 +84,12 @@ public class IndexServlet extends HttpServlet {
         }
         long records_count = selected_r.size();
 
-        int income = 0;
-        int expenditure = 0;
-        for(int i=0; i<selected_r.size(); i++) {
-            if(selected_r.get(i).getContent().equals("収入")) {
-                income += selected_r.get(i).getAmount();
+        int total = 0;
+        for(Record record : selected_r) {
+            if(record.getContent().equals("収入")) {
+                total += record.getAmount();
             } else {
-                expenditure += selected_r.get(i).getAmount();
+                total -= record.getAmount();
             }
         }
 
@@ -110,9 +121,9 @@ public class IndexServlet extends HttpServlet {
 
         request.setAttribute("year", viewed_cl.get(Calendar.YEAR));
         request.setAttribute("month", viewed_cl.get(Calendar.MONTH) + 1);
-        request.setAttribute("income", income);
-        request.setAttribute("expenditure", expenditure);
+        request.setAttribute("total", total);
         request.setAttribute("c_index", c_index);
+        request.setAttribute("selected", selected_content);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/cash_book/index.jsp");
         rd.forward(request, response);

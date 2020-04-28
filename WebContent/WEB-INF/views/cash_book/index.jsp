@@ -11,7 +11,19 @@
         <h2><a href="<c:url value='/?year=${year}&month=${month-1}' />">←</a>
         <c:out value=" ${year}" />年 ${month}月
         <a href="<c:url value='/?year=${year}&month=${month+1}' />">→</a></h2>
-        <table id="record_list" border="1">
+        <form method="GET" action="<c:url value='/' />">
+                        <select name="select">
+                            <option value="" <c:if test="${selected==''}"><c:out value="selected" /></c:if>>すべて</option>
+                            <option value="収入" <c:if test="${selected=='収入'}"><c:out value="selected" /></c:if>>収入</option>
+                            <option value="食費" <c:if test="${selected=='食費'}"><c:out value="selected" /></c:if>>食費</option>
+                            <option value="日用品費" <c:if test="${selected=='日用品費'}"><c:out value="selected" /></c:if>>日用品費</option>
+                            <option value="その他生活費" <c:if test="${selected=='その他生活費'}"><c:out value="selected" /></c:if>>その他生活費</option>
+                            <option value="娯楽費" <c:if test="${selected=='娯楽費'}"><c:out value="selected" /></c:if>>娯楽費</option>
+                            <option value="その他" <c:if test="${selected=='その他'}"><c:out value="selected" /></c:if>>その他</option>
+                        </select>
+            <button type="submit">絞り込み</button>
+        </form>
+        <table id="record_list">
             <thead>
                 <tr>
                     <th class="record_date">日付</th>
@@ -34,10 +46,10 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td>総支出</td>
-                    <td>${expenditure} 円</td>
-                    <td>残金</td>
-                    <td>${income - expenditure} 円</td>
+                    <td></td>
+                    <td>合計</td>
+                    <td>${total} 円</td>
+                    <td><a href="<c:url value='/records/new' />">記帳</a></td>
                 </tr>
             </tfoot>
         </table>

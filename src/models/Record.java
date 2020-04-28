@@ -20,6 +20,10 @@ import javax.persistence.Table;
             name = "getAllRecords",
             query = "SELECT r FROM Record AS r WHERE r.book_user = :user ORDER BY r.date DESC"
             ),
+    @NamedQuery(
+            name = "getSelectedRecords",
+            query = "SELECT r FROM Record AS r WHERE r.book_user = :user AND r.content = :content ORDER BY r.date DESC"
+            )
 
 })
 @Entity
