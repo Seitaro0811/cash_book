@@ -1,0 +1,125 @@
+@CHARSET "UTF-8";
+
+html, body {
+    height: 100%;
+    color: #333333;
+    font-family: "Hiragino Kaku Gothic Pro",Meiryo,"MS PGothic",Helvetica,Arial,sans-serif;
+}
+
+#wrapper {
+    width: 100%;
+    position: relative;
+    min-height: 100%;
+}
+
+#header {
+    width: 100%;
+    height: 70px;
+    background-color: #ffaaaa;
+}
+
+
+#title {
+    font-size: 24px;
+    color: #111111;
+    width: 60%;
+    display: inline-block;
+}
+h1 {
+    margin: 15px;
+    margin-left: 30px;
+}
+
+#user {
+    color: #ffffff;
+    width: 39%;
+    display: inline-block;
+    text-align: right;
+}
+#user a{
+    padding-right: 30px;
+}
+
+#content {
+    width: 550px;
+    padding-bottom: 40px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h2 {
+    font-size: 20px;
+    text-align: center;
+    padding: 5px;
+}
+
+table, tr, th, td {
+    border: 3px solid #cccccc;
+    padding: 3px;
+}
+
+table {
+    width: 550px;
+    table-layout: fixed;
+}
+
+.record_date {
+    width: 55px;
+    text-align: center;
+}
+
+.record_content {
+    width: 120px;
+    text-align: center;
+}
+
+.record_amount {
+    width: 130px;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.record_comment {
+    padding-left: 10px;
+}
+
+.new_record {
+    text-align: right;
+    padding-right: 10px;
+}
+
+form[name=select] {
+    font-size: 13px;
+    text-align: right;
+    padding: 5px;
+    padding-right: 0px;
+}
+
+#footer {
+    width: 100%;
+    height: 40px;
+    background-color: #ffaaaa;
+    position: absolute;
+    bottom: 0;
+}
+
+#footer p {
+    text-align: right;
+    padding: 8px;
+    padding-right: 30px;
+}
+
+#pagination {
+    text-align: right;
+}
+
+#flush_success {
+    padding: 10px;
+    padding-left: 0px;
+}
+
+#flush_error {
+    padding: 10px;
+    padding-left: 0px;
+}

@@ -5,13 +5,19 @@
     <head>
         <meta charset="UTF-8">
         <title>おこづかい帳</title>
+        <link rel="stylesheet" href="<c:url value='/css/reset.css' />">
+        <link rel="stylesheet" href="<c:url value='/css/style.css' />">
     </head>
     <body>
         <div id="wrapper">
             <div id="header">
-                <h1>おこづかい帳</h1>
+                <div id="title">
+                    <h1>おこづかい帳</h1>
+                </div>
                 <c:if test="${login_user != null}">
-                    <p><a href="<c:url value='/book_users/edit' />"><c:out value="${login_user.getName()}" /></a></p>
+                    <div id="user">
+                        <a href="<c:url value='/book_users/edit' />"><c:out value="${login_user.getName()}" /></a>
+                    </div>
                 </c:if>
             </div>
             <div id="content">

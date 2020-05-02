@@ -11,7 +11,7 @@
         <h2><a href="<c:url value='/?year=${year}&month=${month-1}' />">←</a>
         <c:out value=" ${year}" />年 ${month}月
         <a href="<c:url value='/?year=${year}&month=${month+1}' />">→</a></h2>
-        <form method="GET" action="<c:url value='/' />">
+        <form name="select" method="GET" action="<c:url value='/' />">
                         <select name="select">
                             <option value="" <c:if test="${selected==''}"><c:out value="selected" /></c:if>>すべて</option>
                             <option value="収入" <c:if test="${selected=='収入'}"><c:out value="selected" /></c:if>>収入</option>
@@ -47,15 +47,16 @@
             <tfoot>
                 <tr>
                     <td></td>
-                    <td>合計</td>
-                    <td>${total} 円</td>
-                    <td><a href="<c:url value='/records/new' />">記帳</a></td>
+                    <td class="record_content">合計</td>
+                    <td class="record_amount">${total} 円</td>
+                    <td class="new_record"><a href="<c:url value='/records/new' />">記帳</a></td>
                 </tr>
             </tfoot>
         </table>
 
         <div id="pagination">
-            (全 ${records_count} 件)<br />
+            <p>(全 ${records_count} 件)</p>
+            <p>
             <c:forEach var="i" begin="1" end="${(records_count - 1) / 10 + 1}" step="1">
                 <c:choose>
                     <c:when test="${i == page}">
@@ -66,7 +67,7 @@
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
+            </p>
         </div>
-        <p><a href="<c:url value='/records/new' />">記帳</a></p>
     </c:param>
 </c:import>
